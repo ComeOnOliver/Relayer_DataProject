@@ -44,7 +44,7 @@ def query_largest_volume_block(db_path):
 if __name__ == "__main__":
     # Command line argument handling
     if len(sys.argv) != 2:
-        print("Usage: python query_largest_volume_block.py <DB_PATH>")
+        print("Usage: python3 read_db.py <DB_PATH>")
         sys.exit(1)
 
     db_path = sys.argv[1]

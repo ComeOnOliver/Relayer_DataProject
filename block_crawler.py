@@ -27,7 +27,7 @@ def create_database(db_path, schema_file='create_db.sql'):
 
     conn.commit()
     conn.close()
-    
+
 def fetch_transactions(start_block, end_block, db_path, alchemy_url):
     """
     Fetches transactions from the Ethereum Mainnet within a given block range
@@ -105,7 +105,7 @@ def parse_block_range(block_range):
 if __name__ == "__main__":
     # Command line argument handling
     if len(sys.argv) != 4:
-        print("Usage: python block-crawler.py <RPC_ENDPOINT> <DB_PATH> <BLOCK_RANGE>")
+        print("Usage: python3 block_crawler.py <RPC_ENDPOINT> <DB_PATH> <BLOCK_RANGE>")
         sys.exit(1)
 
     rpc_endpoint, db_path, block_range = sys.argv[1], sys.argv[2], sys.argv[3]
