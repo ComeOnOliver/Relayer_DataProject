@@ -11,28 +11,23 @@ import os
 import re
 from web3 import Web3
 
-def create_database(db_path):
+def create_database(db_path, schema_file='create_db.sql'):
     """
-    Creates an SQLite database to store Ethereum transactions.
+    Creates an SQLite database based on the provided schema file.
     
     :param db_path: Path to the SQLite database file.
+    :param schema_file: Path to the SQL file containing the database schema.
     """
     conn = sqlite3.connect(db_path)
     c = conn.cursor()
-    # Define the schema for the transactions table
-    c.execute('''CREATE TABLE IF NOT EXISTS transactions (
-                 tx_hash TEXT PRIMARY KEY,
-                 block_number INTEGER,
-                 from_address TEXT,
-                 to_address TEXT,
-                 value TEXT,
-                 gas INTEGER,
-                 gas_price INTEGER,
-                 nonce INTEGER,
-                 timestamp DATETIME)''')
+
+    with open(schema_file, 'r') as file:
+        schema = file.read()
+        c.executescript(schema)
+
     conn.commit()
     conn.close()
-
+    
 def fetch_transactions(start_block, end_block, db_path, alchemy_url):
     """
     Fetches transactions from the Ethereum Mainnet within a given block range
